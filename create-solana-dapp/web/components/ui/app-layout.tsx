@@ -11,12 +11,34 @@ export function AppLayout({ children }: { children: ReactNode }) {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '6px 12px',
+          textDecoration: 'none',
         }}
       >
         <div>
           <Link href="/">
             <img src="/sol-stripe-logo.png" height={64} alt="SolStripe Logo" />
           </Link>
+        </div>
+        <div>
+
+        <Link href="/transactions" style={{
+          textDecoration: 'none',
+        }}>Limit Order</Link>
+
+        </div>
+        <div>
+
+        <Link href="/transactions" style={{
+          textDecoration: 'none',
+        }}>Buy/Sell Crypto</Link>
+
+        </div>
+        <div>
+
+        <Link href="/transactions" style={{
+          textDecoration: 'none',
+        }}>View Transactions</Link>
+
         </div>
         <div>
           <WalletButton />
