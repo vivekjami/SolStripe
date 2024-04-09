@@ -11,7 +11,7 @@ import {
 // although it's better practice to import your API key as an environment variable, i've instantiated the API key as a constant variable for demo purposes
 const HELIUS_API_KEY = "b956a5d5-4c8f-4caa-9956-3c36d31d17bc";
 
-const Finished = () => {
+const page = () => {
   // react state variables
   const [parseHistoryUrl, setParseHistoryUrl] = React.useState<string>("");
   const [listOfTxs, setListOfTxs] = React.useState<any[]>([]);
@@ -365,6 +365,6 @@ const TransactionDetails: React.FC<TransactionDetailsProps> = ({
   );
 };
 
-export default Finished;
+export default page;
 
 

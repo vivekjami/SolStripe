@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import { WalletButton } from '../solana/solana-provider';
 
+
 export function AppLayout({ children }: { children: ReactNode }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -21,14 +22,14 @@ export function AppLayout({ children }: { children: ReactNode }) {
         </div>
         <div>
 
-        <Link href="/transactions" style={{
+        <Link href="/limitorder" style={{
           textDecoration: 'none',
         }}>Limit Order</Link>
 
         </div>
         <div>
 
-        <Link href="/transactions" style={{
+        <Link href="/buycrypto" style={{
           textDecoration: 'none',
         }}>Buy/Sell Crypto</Link>
 
