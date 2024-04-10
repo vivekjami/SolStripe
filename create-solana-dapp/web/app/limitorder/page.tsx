@@ -1,3 +1,6 @@
+
+
+
 // TypeScript
 "use client"
 // TypeScript
@@ -19,6 +22,17 @@ import { Wallet, BN } from "@coral-xyz/anchor";
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
 import { config } from "dotenv";
 import { getTakerFee } from "./fee";
+
+
+const page = () => {
+  return (
+    <div>
+      <MainComponent/>
+    </div>
+  )
+}
+
+export default page
 config();
 
 export function MainComponent() {
@@ -33,7 +47,7 @@ export function MainComponent() {
     const main = async () => {
       try {
         const connection = new Connection(
-          `https://api.helius.xyz/v0/addresses/${publicKey}/transactions?api-key=b956a5d5-4c8f-4caa-9956-3c36d31d17bc`
+          `https://api.helius.xyz/v0/addresses/${publicKey}/transactions?api-key=b956a5d5-4c8f-4caa-9956-3c36d31d17bc` || "https://api.mainnet-beta.solana.com"
         );
         const limitOrder = new LimitOrderProvider(connection);
         const fee = await limitOrder.getFee();
@@ -44,7 +58,7 @@ export function MainComponent() {
       let filterOrders: { publicKey: PublicKey; account: Order }[] = [];
 
       // group orders according to pair
-      const pendingOrderGroup = pendingOrders.reduce((group, order) => {
+      const pendingOrderGroup = pendingOrders.reduce((group:any , order) => {
         const {
           account: { inputMint, outputMint },
         } = order;
@@ -56,22 +70,22 @@ export function MainComponent() {
       }, {});
 
       // filter top order from each pair
-      Object.values(pendingOrderGroup).forEach(
-        (orders: { publicKey: PublicKey; account: Order }[]) => {
-          const sortOrders = orders.sort((a, b) => {
-            a.account.takingAmount.cmp;
-            const aPrice = new Decimal(a.account.takingAmount.toString()).div(
-              a.account.makingAmount.toString()
-            );
-            const bPrice = new Decimal(b.account.takingAmount.toString()).div(
-              b.account.makingAmount.toString()
-            );
-            return aPrice.cmp(bPrice);
-          });
+      // Object.values(pendingOrderGroup).forEach(
+      //   (orders: { publicKey: PublicKey; account: Order }[]) => {
+      //     const sortOrders = orders.sort((a, b) => {
+      //       a.account.takingAmount.cmp;
+      //       const aPrice = new Decimal(a.account.takingAmount.toString()).div(
+      //         a.account.makingAmount.toString()
+      //       );
+      //       const bPrice = new Decimal(b.account.takingAmount.toString()).div(
+      //         b.account.makingAmount.toString()
+      //       );
+      //       return aPrice.cmp(bPrice);
+      //     });
 
-          filterOrders = [...sortOrders.slice(0, 1), ...filterOrders];
-        }
-      );
+      //     filterOrders = [...sortOrders.slice(0, 1), ...filterOrders];
+      //   }
+      // );
 
       for (let order of pendingOrders) {
         const {
@@ -154,7 +168,7 @@ export function MainComponent() {
           ).blockhash;
           swapTransaction.message = txMessage.compileToV0Message([...swapALT]);
 
-          swapTransaction.sign([Wallet.payer]);
+          swapTransaction.sign([Wallet.local().payer]);
 
           const txid = await connection.sendRawTransaction(
             swapTransaction.serialize()
