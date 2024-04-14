@@ -29,7 +29,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
         </div>
         <div>
 
-        <Link href="/buycrypto" style={{
+        <Link href="/" style={{
           textDecoration: 'none',
         }}>Buy/Sell Crypto</Link>
 
