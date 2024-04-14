@@ -22,7 +22,7 @@ export function AppLayout({ children }: { children: ReactNode }) {
         </div>
         <div>
 
-        <Link href="/limitorder" style={{
+        <Link href="/" style={{
           textDecoration: 'none',
         }}>Limit Order</Link>
 
