@@ -25,8 +25,17 @@ Run these in your terminal:
 git clone https://github.com/vivekjami/SolStripe
 cd create-solana-dapp
 cd web
-npm i
-npm run dev
+```
+then to install packages:
+(recommended)
+```
+yarn
+yarn run dev
+```
+or
+```
+npm i 
+npm run dev 
 ```
 
 Open `localhost:3000` in your browser.
